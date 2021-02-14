@@ -14,20 +14,17 @@
 			</div>
 		</div>
 		<div class="col-12">
-			<form action="/products/create" method="POST">
+			<form action="/products/create" method="POST" enctype="multipart/form-data">
 				<div class="row product-detail">
 					<div class="col-12 col-md-6">
 						<label for="name" class="form-label">Nombre del producto:</label>
-						<input type="text" id="name" name="name" placeholder="Ej: Zapatillas Reebok" class="form-input">
+						<input type="text" id="title" name="title" placeholder="Ej: Zapatillas Reebok" class="form-input">
 					</div>
 					<div class="col-12 col-md-6">
 						<label for="price" class="form-label">Precio del producto:</label>
 						<input type="text" id="price" name="price" placeholder="Ej: 5678" class="form-input">
 					</div>
-					<div class="col-12 col-md-6">
-						<label for="discount" class="form-label">Descuento:</label>
-						<input type="text" id="discount" name="discount" placeholder="Ej: 15" class="form-input">
-					</div>
+				 
 					<div class="col-12 col-md-6">
 						<label for="category" class="form-label">Categorías:</label>
 						<select name="category" id="category" class="form-input">
@@ -42,7 +39,7 @@
 					</div>
 					<div class="col-12 col-md-6">
 						<label for="category" class="form-label">Marcas:</label>
-						<select name="category" id="category" class="form-input">
+						<select name="brand" id="category" class="form-input">
 							<% brands.forEach(brand=>{%> 
 
 
@@ -50,6 +47,17 @@
 
 <% }) %> 
 						</select>
+					</div>
+					<div class="col-12 col-md-6">
+						<label for="image" class="form-label">Subir imagen:</label>
+						<input
+							type="file"
+							value=""
+							id="image"
+							name="file"
+							placeholder="Ej: 15"
+							class="form-input"
+						/>
 					</div>
 					<div class="col-12">
 						<label for="description" class="form-label">Descipción:</label>

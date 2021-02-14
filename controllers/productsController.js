@@ -7,7 +7,8 @@ const controller = {
 	index: async (req, res) => {
 		const products = await db.Product.findAll({ include: { association: 'brand' } })
 
-		console.log(products)
+		products.forEach((product) => (product.price = toThousand(product.price)))
+
 		res.locals.products = products
 
 		res.render('products')
@@ -27,17 +28,30 @@ const controller = {
 
 	// Create - Form to create
 	create: async (req, res) => {
-
 		const categories = await db.Categories.findAll()
 		const brands = await db.Brands.findAll()
-		res.locals.brands=brands
-		res.locals.categories=categories
+		res.locals.brands = brands
+		res.locals.categories = categories
 		res.render('product-create-form')
 	},
 
 	// Create -  Method to store
-	store: (req, res) => {
-		// Do the magic
+	store: async (req, res) => {
+		const { title, description, brand, category, price } = req.body
+
+		const producModel = {
+			title,
+			brand_id: brand,
+			category_id: category,
+			price,
+			description,
+			photo: `/images/products/${req.files[0].originalname}`,
+			stock:100
+		}
+
+		 
+		await db.Product.create(producModel)
+		res.redirect('/')
 	},
 
 	// Update - Form to edit
@@ -54,8 +68,8 @@ const controller = {
 	// Update - Method to update
 	update: async (req, res) => {
 		const id = req.params.productId
-		const photoPath= `/images/products/${req.files[0].originalname}`
-		await db.Product.update({photo:photoPath  },{where:{id:id}})
+		const photoPath = `/images/products/${req.files[0].originalname}`
+		await db.Product.update({ photo: photoPath }, { where: { id: id } })
 
 		res.redirect('/')
 	},
