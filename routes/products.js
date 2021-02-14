@@ -18,6 +18,10 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage })
 
+// ************ validations ************
+
+ 
+const validate = require('../helpers/validationInput');
 
 
 // ************ Controller Require ************
@@ -28,7 +32,7 @@ router.get('/', productsController.index);
 
 /*** CREATE ONE PRODUCT ***/ 
 router.get('/create', productsController.create); 
-router.post('/create',upload.any(), productsController.store); 
+router.post('/create',upload.any(),validate('title','description','price'), productsController.store); 
 
 
 /*** GET ONE PRODUCT ***/ 

@@ -1,6 +1,12 @@
 const toThousand = (n) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
 
+/*---------------------- database required ---------------------*/
+
 const db = require('../db/models')
+
+/*---------------------- validations ---------------------*/
+
+const { validationResult } = require('express-validator')
 
 const controller = {
 	// Root - Show all products
@@ -32,11 +38,24 @@ const controller = {
 		const brands = await db.Brands.findAll()
 		res.locals.brands = brands
 		res.locals.categories = categories
-		res.render('product-create-form')
+		res.render('product-create-form',{errors:{} ,body:{}})
 	},
 
 	// Create -  Method to store
 	store: async (req, res) => {
+		const errors = validationResult(req)
+		console.log(req.files[0]);
+		if (!errors.isEmpty() || (! req.files[0])) {
+			res.locals.errors = errors.mapped()
+			res.locals.body = req.body
+			res.locals.brands = await db.Brands.findAll()
+			res.locals.categories = await db.Categories.findAll()
+			if(!req.files[0]){
+				res.locals.errors.image = 'Ingresa una foto de tu producto!'
+			}
+			return res.render('product-create-form')
+		}
+
 		const { title, description, brand, category, price } = req.body
 
 		const producModel = {
@@ -46,10 +65,9 @@ const controller = {
 			price,
 			description,
 			photo: `/images/products/${req.files[0].originalname}`,
-			stock:100
+			stock: 100,
 		}
 
-		 
 		await db.Product.create(producModel)
 		res.redirect('/')
 	},
