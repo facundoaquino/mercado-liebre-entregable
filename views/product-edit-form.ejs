@@ -1,68 +1,109 @@
 <!DOCTYPE html>
 <html lang="es">
-<!-- Include Head -->
-<%- include('partials/head', {title: 'Editando: ' + product.title}) %>
-<body>
-	<!-- Header -->
-	<%- include('partials/headerNavbar') %>
-	<!-- /Header -->
+	<!-- Include Head -->
+	<%- include('partials/head', {title: 'Editando: ' + product.title}) %>
+	<body>
+		<!-- Header -->
+		<%- include('partials/headerNavbar') %>
+		<!-- /Header -->
 
-	<div class="container products-wrapper">
-		<div class="row">
+		<div class="container products-wrapper">
+			<div class="row">
+				<div class="col-12">
+					<h2 class="products-title">Estás editando: <i><%=product.title%></i></h2>
+				</div>
+			</div>
 			<div class="col-12">
-				<h2 class="products-title">Estás editando: <i><%=product.title%></i></h2>
+				<form
+					action="/products/<%=product.id%>/update/?_method=PATCH"
+					method="POST"
+					enctype="multipart/form-data"
+				>
+					<div class="row product-detail">
+						<div class="col-12 col-md-6">
+							<label for="name" class="form-label">Nombre del producto:</label>
+							<input
+								type="text"
+								id="name"
+								name="title"
+								placeholder="Ej: Zapatillas Reebok"
+								class="form-input"
+								value="<%=product.title%>"
+							/>
+							<% if(errors.title) {%>
+
+							<p class="validationMessage" style="font-size: 12px">
+								<i class="validationMessage--i fas fa-exclamation-triangle" style="color: tomato"></i
+								><%=errors.title.msg%>
+							</p>
+
+							<% }%>
+						</div>
+						<div class="col-12 col-md-6">
+							<label for="price" class="form-label">Precio del producto:</label>
+							<input
+								type="text"
+								id="price"
+								name="price"
+								placeholder="Ej: 5678"
+								class="form-input"
+								value="<%=product.price%>"
+							/>
+							<% if(errors.price) {%>
+
+							<p class="validationMessage" style="font-size: 12px">
+								<i class="validationMessage--i fas fa-exclamation-triangle" style="color: tomato"></i
+								><%=errors.price.msg%>
+							</p>
+
+							<% }%>
+						</div>
+
+						<div class="col-12 col-md-6">
+							<label for="image" class="form-label">Subir imagen:</label>
+							<input
+								type="file"
+								value=""
+								id="image"
+								name="file"
+								placeholder="Ej: 15"
+								class="form-input"
+								accept=".jpg,.webp,.jfif"
+							/>
+						</div>
+						<div class="col-12 col-md-6">
+							<label for="category" class="form-label">Categoría:</label>
+							<select name="category" id="category" class="form-input" disabled>
+								<option value=""><%=category.name%></option>
+							</select>
+						</div>
+						<div class="col-12 col-md-6">
+							<label for="category" class="form-label">Marcas:</label>
+							<select name="brand" id="category" class="form-input">
+								<% brands.forEach(brand=>{%>
+
+								<option value="<%=brand.id%>"><%=brand.name%></option>
+
+								<% }) %>
+							</select>
+						</div>
+						<div class="col-12">
+							<label for="description" class="form-label">Descipción:</label>
+							<textarea name="description" id="description" class="form-input">
+<%= product.description %></textarea
+							>
+						</div>
+						<div class="col-12">
+							<button type="submit" class="buy-now-button">Guardar producto</button>
+						</div>
+					</div>
+				</form>
 			</div>
 		</div>
-		<div class="col-12">
-			<form action="/products/<%=product.id%>/update/?_method=PUT" method="POST" enctype="multipart/form-data">
-				<div class="row product-detail">
-					<div class="col-12 col-md-6">
-						<label for="name" class="form-label">Nombre del producto:</label>
-						<input type="text" id="name" name="name" placeholder="Ej: Zapatillas Reebok" class="form-input" value="<%=product.title%>">
-					</div>
-					<div class="col-12 col-md-6">
-						<label for="price" class="form-label">Precio del producto:</label>
-						<input type="text" id="price" name="price" placeholder="Ej: 5678" class="form-input" value="<%=product.price%>">
-					</div>
-					<div class="col-12 col-md-6">
-						<label for="discount" class="form-label">Descuento:</label>
-						<input type="text" id="discount" name="discount" placeholder="Ej: 15" class="form-input">
-					</div>
-					<div class="col-12 col-md-6">
-						<label for="image" class="form-label">Subir imagen:</label>
-						<input
-							type="file"
-							value=""
-							id="image"
-							name="file"
-							placeholder="Ej: 15"
-							class="form-input"
-						/>
-					</div>
-					<div class="col-12 col-md-6">
-						<label for="category" class="form-label">Categoría:</label>
-						<select name="category" id="category" class="form-input">
-							<option value="">Elegí</option>
-							<option value="in-sale">En oferta</option>
-							<option value="visited" >Últimos agregados</option>
-						</select>
-					</div>
-					<div class="col-12">
-						<label for="description" class="form-label">Descipción:</label>
-						<textarea name="description" id="description" class="form-input"><%= product.description %></textarea>
-					</div>
-					<div class="col-12">
-						<button type="submit" class="buy-now-button">Guardar producto</button>
-					</div>
-				</div>
-			</form>
-		</div>
+		<!-- /todos los productos -->
 
-	</div>
-	<!-- /todos los productos -->
-
-	<!-- footer -->
-	<%- include('partials/footer') %>
-	<!-- /footer -->
-</body>	
+		<!-- footer -->
+		<%- include('partials/footer') %>
+		<!-- /footer -->
+	</body>
 </html>

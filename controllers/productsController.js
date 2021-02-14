@@ -38,19 +38,19 @@ const controller = {
 		const brands = await db.Brands.findAll()
 		res.locals.brands = brands
 		res.locals.categories = categories
-		res.render('product-create-form',{errors:{} ,body:{}})
+		res.render('product-create-form', { errors: {}, body: {} })
 	},
 
 	// Create -  Method to store
 	store: async (req, res) => {
 		const errors = validationResult(req)
-		console.log(req.files[0]);
-		if (!errors.isEmpty() || (! req.files[0])) {
+		 
+		if (!errors.isEmpty() || !req.files[0]) {
 			res.locals.errors = errors.mapped()
 			res.locals.body = req.body
 			res.locals.brands = await db.Brands.findAll()
 			res.locals.categories = await db.Categories.findAll()
-			if(!req.files[0]){
+			if (!req.files[0]) {
 				res.locals.errors.image = 'Ingresa una foto de tu producto!'
 			}
 			return res.render('product-create-form')
@@ -68,8 +68,8 @@ const controller = {
 			stock: 100,
 		}
 
-		await db.Product.create(producModel)
-		res.redirect('/')
+		const productCreated = await db.Product.create(producModel)
+		res.redirect(`/products/${productCreated.id}`)
 	},
 
 	// Update - Form to edit
@@ -78,18 +78,51 @@ const controller = {
 
 		const product = await db.Product.findByPk(id)
 
-		product.price = toThousand(product.price)
+		 
+		res.locals.brands = await db.Brands.findAll()
+		res.locals.category = await db.Categories.findByPk(product.category_id)
 		res.locals.product = product
 
-		res.render('product-edit-form')
+		res.render('product-edit-form',{ errors: {}  })
 	},
 	// Update - Method to update
 	update: async (req, res) => {
+		const errors = validationResult(req)
 		const id = req.params.productId
-		const photoPath = `/images/products/${req.files[0].originalname}`
-		await db.Product.update({ photo: photoPath }, { where: { id: id } })
 
-		res.redirect('/')
+		const product = await db.Product.findByPk(id)
+		 
+		if (!errors.isEmpty() ) {
+			res.locals.errors = errors.mapped()			 
+			res.locals.brands = await db.Brands.findAll()
+			res.locals.category = await db.Categories.findByPk(product.category_id)
+			res.locals.product =  {...req.body,id:id}
+			 
+			return res.render('product-edit-form')
+		}
+		// fix => continuar con la persistencia de la marca y la validacion y persistencia en la description
+		 
+		const { title, description, brand, price } = req.body
+
+		const producModel = {
+			title,
+			brand_id: brand,
+			price,
+			description,
+			stock: 100,
+		}
+		if (req.files[0]) {
+			await db.Product.update(
+				{ ...producModel, photo: `/images/products/${req.files[0].originalname}` },
+				{ where: { id: id } }
+			)
+		} else {
+			await db.Product.update(producModel, { where: { id: id } })
+		}
+		 
+
+		res.redirect(`/products/${id}`)
+
 	},
 
 	// Delete - Delete one product from DB

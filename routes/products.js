@@ -40,7 +40,7 @@ router.get('/:productId', productsController.show);
 
 /*** EDIT ONE PRODUCT ***/ 
 router.get('/:productId/edit', productsController.edit); 
-router.put('/:productId/update',upload.any(), productsController.update); 
+router.patch('/:productId/update',upload.any(),validate('title','description','price'), productsController.update); 
 
 
 /*** DELETE ONE PRODUCT ***/ 
