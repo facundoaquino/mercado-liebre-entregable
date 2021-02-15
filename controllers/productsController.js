@@ -124,8 +124,12 @@ const controller = {
 	},
 
 	// Delete - Delete one product from DB
-	destroy: (req, res) => {
-		res.send('eliminado')
+	destroy: async (req, res) => {
+		const id = req.params.productId
+
+		await db.Product.destroy({where:{id}})
+
+		res.redirect('/products')
 	},
 }
 
