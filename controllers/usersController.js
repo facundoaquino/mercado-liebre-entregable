@@ -15,10 +15,14 @@ const userController = {
   },
 
   registering: async (req, res) => {
+	
     const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      res.locals.errors = errors.mapped();
 
+	const emailRepeated = await db.User.findOne({where:{email:req.body.email}})
+	
+    if (!errors.isEmpty() || emailRepeated) {
+      res.locals.errors = errors.mapped();
+		console.log(res.locals.errors.password);
       return res.render("register");
     }
 
