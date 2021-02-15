@@ -1,37 +1,65 @@
 <!DOCTYPE html>
 <html lang="es">
-<!-- Include Head -->
-<%- include('partials/head', {title: 'Registrate'}) %>
-<body>
-	<!-- Header -->
-	<%- include('partials/headerNavbar') %>
-	<!-- /Header -->
-<!-- fix register styles and form inputs -->
-	<div class="container products-wrapper" ;">
-		<div class="row">
-			<div class="col-12">
-				<h2 class="products-title">Formulario de registro</h2>
-			</div>
-		</div>
-		    <div class="col-12">
-    			<form style="max-width: 500px" action="/products/create" method="POST" enctype="multipart/form-data">
-    				<div class="row product-detail">
-    					<div class="col-12 col-md-6">
-    						<label for="email" class="form-label">Email</label>
-    						<input type="text" id="email" name="email" placeholder="Ingresa tu email" class="form-input" >
-    					
-    					<div class="col-12">
-    						<button type="submit" class="buy-now-button">Registrate</button>
-    					</div>
-    				</div>
-    			</form>
-    		</div>
+  <!-- Include Head -->
+  <%- include('partials/head', {title: 'Registrate'}) %>
+  <body>
+    <!-- Header -->
+    <%- include('partials/headerNavbar') %>
+    <!-- /Header -->
 
-	</div>
-	<!-- /todos los productos -->
+    <div class="container products-wrapper">
+      <div class="row">
+        <div class="col-12">
+          <h2 class="products-title">Registrate</h2>
+        </div>
+      </div>
+      <div class="col-12">
+        <form action="/register" method="POST">
+          <div class="product-detail">
+            <div class="col-12 col-md-6">
+              <label for="email" class="form-label">Email</label>
+              <input
+                type="text"
+                id="email"
+                name="email"
+                placeholder="Ingresa tu email"
+                class="form-input"
+              />
 
-	<!-- footer -->
-	<%- include('partials/footer') %>
-	<!-- /footer -->
-</body>	
+              <% if(errors.email) {%>
+
+              <p class="validationMessage" style="font-size: 12px">
+                <i
+                  class="validationMessage--i fas fa-exclamation-triangle"
+                  style="color: tomato"
+                ></i
+                ><%=errors.email.msg%>
+              </p>
+
+              <% }%>
+            </div>
+            <div class="col-12 col-md-6">
+              <label for="password" class="form-label">Contraseña</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Ingresa tu cotraseña"
+                class="form-input"
+              />
+            </div>
+
+            <div class="col-12">
+              <button type="submit" class="buy-now-button">Registrate</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- /todos los productos -->
+
+    <!-- footer -->
+    <%- include('partials/footer') %>
+    <!-- /footer -->
+  </body>
 </html>

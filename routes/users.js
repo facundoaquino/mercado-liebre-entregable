@@ -1,10 +1,15 @@
 // ************ Require's ************
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
 // ************ Controller Require ************
-const userController = require('../controllers/usersController');
+const userController = require("../controllers/usersController");
 
-router.get('/register', userController.register); 
+// ************ validations ************
+
+const validate = require("../helpers/validationInput");
+
+router.get("/register", userController.register);
+router.post("/register",validate('email'), userController.registering);
 
 module.exports = router;
