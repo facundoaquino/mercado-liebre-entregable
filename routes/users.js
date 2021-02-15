@@ -10,6 +10,6 @@ const userController = require("../controllers/usersController");
 const validate = require("../helpers/validationInput");
 
 router.get("/register", userController.register);
-router.post("/register",validate('email'), userController.registering);
+router.post("/register",validate('email','password'), userController.registering);
 
 module.exports = router;

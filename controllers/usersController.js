@@ -11,18 +11,25 @@ const { validationResult } = require("express-validator");
 
 const userController = {
   register: (req, res) => {
-    res.render("register",{errors:{}});
+    res.render("register", { errors: {}, body: {} });
   },
 
   registering: async (req, res) => {
-	
     const errors = validationResult(req);
 
-	const emailRepeated = await db.User.findOne({where:{email:req.body.email}})
-	
-    if (!errors.isEmpty() || emailRepeated) {
+    const emailRepeated = await db.User.findOne({
+      where: { email: req.body.email },
+    });
+
+    if (emailRepeated) {
+      console.log(req.body);
+      res.locals.body = req.body;
+      res.locals.uniqueEmail = "Ya existe un usuario registrado con este email";
+      return res.render("register",{errors:{}});
+    }
+    if (!errors.isEmpty()) {
       res.locals.errors = errors.mapped();
-		console.log(res.locals.errors.password);
+      res.locals.body = req.body;
       return res.render("register");
     }
 

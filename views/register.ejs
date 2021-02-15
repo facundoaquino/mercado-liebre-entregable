@@ -21,6 +21,7 @@
               <input
                 type="text"
                 id="email"
+				value="<%=body.email%>"
                 name="email"
                 placeholder="Ingresa tu email"
                 class="form-input"
@@ -37,6 +38,17 @@
               </p>
 
               <% }%>
+			  <% if(locals.uniqueEmail) {%>
+
+				<p class="validationMessage" style="font-size: 12px">
+				  <i
+					class="validationMessage--i fas fa-exclamation-triangle"
+					style="color: tomato"
+				  ></i
+				  ><%=uniqueEmail%>
+				</p>
+  
+				<% }%>
             </div>
             <div class="col-12 col-md-6">
               <label for="password" class="form-label">Contraseña</label>
@@ -46,7 +58,19 @@
                 name="password"
                 placeholder="Ingresa tu cotraseña"
                 class="form-input"
+				value="<%=body.password%>"
               />
+			  <% if(errors.password) {%>
+
+				<p class="validationMessage" style="font-size: 12px">
+				  <i
+					class="validationMessage--i fas fa-exclamation-triangle"
+					style="color: tomato"
+				  ></i
+				  ><%=errors.password.msg%>
+				</p>
+  
+				<% }%>
             </div>
 
             <div class="col-12">
