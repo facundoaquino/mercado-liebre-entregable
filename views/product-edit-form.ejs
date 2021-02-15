@@ -81,6 +81,12 @@
 							<label for="category" class="form-label">Marcas:</label>
 							<select name="brand" id="category" class="form-input">
 								<% brands.forEach(brand=>{%>
+								<%if(brand.id == product.brand_id ) {%>
+								<option value="<%=brand.id%>" selected><%=brand.name%></option>
+										
+
+<%	} %> 
+									
 
 								<option value="<%=brand.id%>"><%=brand.name%></option>
 
@@ -92,6 +98,14 @@
 							<textarea name="description" id="description" class="form-input">
 <%= product.description %></textarea
 							>
+							<% if(errors.description) {%>
+
+								<p class="validationMessage" style="font-size: 12px">
+									<i class="validationMessage--i fas fa-exclamation-triangle" style="color: tomato"></i
+									><%=errors.description.msg%>
+								</p>
+	
+								<% }%>
 						</div>
 						<div class="col-12">
 							<button type="submit" class="buy-now-button">Guardar producto</button>

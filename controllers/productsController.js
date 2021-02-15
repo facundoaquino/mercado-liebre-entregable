@@ -78,7 +78,6 @@ const controller = {
 
 		const product = await db.Product.findByPk(id)
 
-		 
 		res.locals.brands = await db.Brands.findAll()
 		res.locals.category = await db.Categories.findByPk(product.category_id)
 		res.locals.product = product
@@ -100,7 +99,6 @@ const controller = {
 			 
 			return res.render('product-edit-form')
 		}
-		// fix => continuar con la persistencia de la marca y la validacion y persistencia en la description
 		 
 		const { title, description, brand, price } = req.body
 
@@ -127,7 +125,7 @@ const controller = {
 
 	// Delete - Delete one product from DB
 	destroy: (req, res) => {
-		// Do the magic
+		res.send('eliminado')
 	},
 }
 

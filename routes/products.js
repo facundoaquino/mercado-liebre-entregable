@@ -44,7 +44,7 @@ router.patch('/:productId/update',upload.any(),validate('title','description','p
 
 
 /*** DELETE ONE PRODUCT ***/ 
-router.delete('/:id', productsController.destroy); 
+router.delete('/:productId/delete', productsController.destroy); 
 
 
 module.exports = router;
