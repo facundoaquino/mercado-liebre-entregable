@@ -11,5 +11,7 @@ const validate = require("../helpers/validationInput");
 
 router.get("/register", userController.register);
 router.post("/register",validate('email','password'), userController.registering);
+router.get("/login", userController.loginForm);
+router.post("/login",validate('email','password'), userController.login);
 
 module.exports = router;

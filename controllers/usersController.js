@@ -37,7 +37,17 @@ const userController = {
     const userEmail = req.body.email;
 
     await db.User.create({ email: userEmail, password: passwordHashed });
+
+	res.redirect('/login')
   },
+  loginForm:(req,res)=>{
+
+	res.render('login', { errors: {}, body: {} })
+  },
+  login:(req,res)=>{
+	console.log(req.body);
+	res.send('sigin in')
+  }
 };
 
 module.exports = userController;
