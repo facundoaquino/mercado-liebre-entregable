@@ -61,6 +61,17 @@
 				</p>
   
 				<% }%>
+        <% if(loginWrong) {%>
+
+          <p class="validationMessage" style="font-size: 12px">
+            <i
+            class="validationMessage--i fas fa-exclamation-triangle"
+            style="color: tomato"
+            ></i
+            ><%=loginWrong%>
+          </p>
+    
+          <% }%>
             </div>
 
             <div class="col-12">

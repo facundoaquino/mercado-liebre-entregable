@@ -20,8 +20,7 @@ const controller = {
     const totalRound = Math.floor((count + 10) / 10);
     const page = startPage / 10 + 1;
     res.locals.referencePage = { totalRound, page };
-
-    if (products.length < 10) {
+    if (totalRound == page) {
       res.locals.pagination = { continue: false, count };
     } else {
       res.locals.pagination = { continue: true, start: startPage + 10, count };

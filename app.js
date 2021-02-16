@@ -5,11 +5,13 @@ const express = require('express');
 const logger = require('morgan');
 const path = require('path');
 const methodOverride =  require('method-override'); // Pasar poder usar los métodos PUT y DELETE
-
+const session = require('express-session')
 // ************ express() - (don't touch) ************
 const app = express();
 
 // ************ Middlewares - (don't touch) ************
+app.use(session({secret:'meli',resave:false, saveUninitialized:true}))
+
 app.use(express.static(path.join(__dirname, 'public')));  // Necesario para los archivos estáticos en el folder /public
 app.use(express.urlencoded({ extended: false }));
 // app.use(logger('dev'));

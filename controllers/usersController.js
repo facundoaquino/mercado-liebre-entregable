@@ -42,10 +42,28 @@ const userController = {
   },
   loginForm:(req,res)=>{
 
-	res.render('login', { errors: {}, body: {} })
+	res.render('login', { errors: {}, body: {} ,loginWrong:false})
   },
-  login:(req,res)=>{
-	console.log(req.body);
+  login: async  (req,res)=>{
+    const errors = validationResult(req);
+	  if (!errors.isEmpty()) {
+      res.locals.errors = errors.mapped();
+      res.locals.body = req.body;
+      return res.render("login",{loginWrong:false});
+    }
+
+    const user = await db.User.findOne({where:{email:req.body.email}})
+
+    const passwordIsTrue = bcrypt.compareSync(req.body.password , user.password)
+
+    if(!user || !passwordIsTrue){
+      res.locals.loginWrong = 'Credenciales invalidas'
+      res.locals.body=req.body
+      res.render('login', { errors: {} })
+
+    }
+
+    
 	res.send('sigin in')
   }
 };
