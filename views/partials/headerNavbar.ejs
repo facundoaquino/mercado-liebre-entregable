@@ -38,7 +38,11 @@
 			<ul class="right-navbar">
 				<li><a href="/register">Creá tu cuenta <i class="far fa-address-card"></i></a></li>
 				<li><a href="/login">Ingresá <i class="fas fa-sign-in-alt"></i></a></li>
-				<li><a href="#">Mis compras <i class="fas fa-shopping-basket"></i></a></li>
+				<% if(locals.user){%> 
+
+
+					<li><a href="#">Mi cuenta:  <%= user.userShortName %>  <i class="fas fa-user"></i></a></li>
+			<% 	} %> 
 			</ul>
 		</nav>
 	</div>

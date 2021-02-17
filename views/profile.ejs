@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+  <!-- Include Head -->
+  <%- include('partials/head', {title: 'Profile ' }) %>
+  <body>
+    <!-- Header -->
+    <%- include('partials/headerNavbar') %>
+    <!-- /Header -->
+
+    <div class="container products-wrapper">
+      <div class="row">
+        <div class="col-12">
+          <h2 class="products-title">Tu cuenta</h2>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="card fs-2" style="width: 30rem;">
+            <img src="images/products/default-image.png" class="card-img-top" alt="...">
+            <div class="card-body">
+              <p class="card-text">Email: <%= user.email %> </p>
+              <p class="card-text">Fecha registro: <%= user.dates%> </p>
+            </div>
+          </div>
+        <form action="/profile" method="POST">
+        	<div class="col-12 col-md-6">
+                <label for="image" class="form-label">Subir imagen:</label>
+                <input
+                    type="file"
+                    value=""
+                    id="image"
+                    name="file"
+                    placeholder="Ej: 15"
+                    class="form-input"
+                    accept=".jpg,.webp,.jfif"
+                />
+            </div>
+         
+           
+
+            <div class="col-12">
+              <button type="submit" class="buy-now-button">Actualizar avatar</button>
+            </div>
+          
+        </form>
+      </div>
+    </div>
+    <!-- /todos los productos -->
+
+    <!-- footer -->
+    <%- include('partials/footer') %>
+    <!-- /footer -->
+  </body>
+</html>

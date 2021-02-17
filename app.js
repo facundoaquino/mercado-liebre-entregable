@@ -8,10 +8,11 @@ const methodOverride =  require('method-override'); // Pasar poder usar los mét
 const session = require('express-session')
 // ************ express() - (don't touch) ************
 const app = express();
+const authMiddleware = require('./middlewares/authMiddleware');
 
 // ************ Middlewares - (don't touch) ************
 app.use(session({secret:'meli',resave:false, saveUninitialized:true}))
-
+app.use(authMiddleware)
 app.use(express.static(path.join(__dirname, 'public')));  // Necesario para los archivos estáticos en el folder /public
 app.use(express.urlencoded({ extended: false }));
 // app.use(logger('dev'));
