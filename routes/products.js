@@ -27,12 +27,16 @@ const validate = require('../helpers/validationInput');
 // ************ Controller Require ************
 const productsController = require('../controllers/productsController');
 
+// ************ local middleware ************
+
+const userLogued = require("../middlewares/userLogued");
+
 /*** GET ALL PRODUCTS ***/ 
 router.get('/', productsController.index); 
 
 /*** CREATE ONE PRODUCT ***/ 
 router.get('/create', productsController.create); 
-router.post('/create',upload.any(),validate('title','description','price'), productsController.store); 
+router.post('/create', userLogued ,upload.any(),validate('title','description','price'), productsController.store); 
 
 
 /*** GET ONE PRODUCT ***/ 
@@ -40,11 +44,11 @@ router.get('/:productId', productsController.show);
 
 /*** EDIT ONE PRODUCT ***/ 
 router.get('/:productId/edit', productsController.edit); 
-router.patch('/:productId/update',upload.any(),validate('title','description','price'), productsController.update); 
+router.patch('/:productId/update',  userLogued, upload.any(),validate('title','description','price'), productsController.update); 
 
 
 /*** DELETE ONE PRODUCT ***/ 
-router.delete('/:productId/delete', productsController.destroy); 
+router.delete('/:productId/delete', userLogued ,productsController.destroy); 
 
 
 module.exports = router;
