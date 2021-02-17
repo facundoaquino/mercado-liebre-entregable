@@ -142,12 +142,23 @@ hr {
 
 /*====== Banner ======*/
 .banner {
-  background-image: url(/images/img-home-banner.jpg);
+  background-image: url(/images/banner1.webp);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
   height: 100px;
+  animation: showBanner 3s infinite
 }
+@keyframes showBanner {
+
+  from {
+    opacity: 50%;
+  }
+  to{
+    opacity: 100%;
+  }
+}
+
 
 
 /*====== Products ======*/

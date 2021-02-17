@@ -17,7 +17,8 @@
 		<div class="product-detail">
 			<div class="row">
 				<div class="col-12 col-lg-8">
-					<img src="<%=product.photo%>" alt="product image" class="product-detail-img">
+<a href="<%=product.photo%>" data-lightbox="roadtrip"><img src="<%=product.photo%>" alt=""></a>
+
 					<p class="product-detail-description">
 						<%=product.description%> 
 					</p>
@@ -55,10 +56,9 @@
 		</div>
 	</div>
 	<!-- /product detail -->
-
 	<!-- footer -->
 	<%- include('partials/footer') %>
 	<!-- /footer -->
-
+	<script src="/js/lightbox.js"></script>
 </body>	
 </html>
