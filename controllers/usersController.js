@@ -57,6 +57,7 @@ const userController = {
         "id",
         "password",
         "email",
+        "avatar",
         [
           sequelize.fn(
             "DATE_FORMAT",
@@ -75,16 +76,34 @@ const userController = {
       res.locals.body = req.body;
       res.render("login", { errors: {} });
     }
-   
-     
+
     const userShortName = user.email.split("@")[0];
-    const { email, dates ,_previousDataValues} = user;
-    req.session.user = { email, userShortName, dates:_previousDataValues.dates };
+    const { email, _previousDataValues, avatar, id } = user;
+    req.session.user = {
+      email,
+      userShortName,
+      dates: _previousDataValues.dates,
+      avatar,
+      id,
+    };
 
     res.redirect("/profile");
   },
   profile: (req, res) => {
     res.render("profile");
+  },
+  avatarUpdate: async (req, res) => {
+    const avatar = req.files.length == 0 ? false : req.files[0].filename;
+
+    if (avatar) {
+      await db.User.update({ avatar }, { where: { id: req.session.user.id } });
+      req.session.user.avatar = avatar;
+      res.redirect("/profile");
+    } else {
+      res.locals.notImage = "Ingresa una foto de tu avatar!";
+
+      res.render("profile");
+    }
   },
 };
 
