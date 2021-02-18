@@ -23,7 +23,6 @@ const userController = {
     });
 
     if (emailRepeated) {
-      console.log(req.body);
       res.locals.body = req.body;
       res.locals.uniqueEmail = "Ya existe un usuario registrado con este email";
       return res.render("register", { errors: {} });
@@ -80,7 +79,6 @@ const userController = {
      
     const userShortName = user.email.split("@")[0];
     const { email, dates ,_previousDataValues} = user;
-    console.log(_previousDataValues);
     req.session.user = { email, userShortName, dates:_previousDataValues.dates };
 
     res.redirect("/profile");

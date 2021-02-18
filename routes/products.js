@@ -29,7 +29,7 @@ const productsController = require('../controllers/productsController');
 
 // ************ local middleware ************
 
-const userLogued = require("../middlewares/userLogued");
+const {userLogued} = require("../middlewares/userLogued");
 
 /*** GET ALL PRODUCTS ***/ 
 router.get('/', productsController.index); 

@@ -6,4 +6,13 @@ const userLogued = (req, res, next) => {
   }
 };
 
-module.exports = userLogued;
+const userIsLogin = (req, res, next) => {
+  if (req.session.user) {
+   
+    res.redirect("/profile");
+   }else{
+     next()
+   }
+};
+
+module.exports = {userLogued,userIsLogin};

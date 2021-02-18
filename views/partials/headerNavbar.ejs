@@ -36,8 +36,12 @@
 			</ul>
 
 			<ul class="right-navbar">
-				<li><a href="/register">Creá tu cuenta <i class="far fa-address-card"></i></a></li>
-				<li><a href="/login">Ingresá <i class="fas fa-sign-in-alt"></i></a></li>
+				<% if(!locals.user){%> 
+
+					<li><a href="/register">Creá tu cuenta <i class="far fa-address-card"></i></a></li>
+					<li><a href="/login">Ingresá <i class="fas fa-sign-in-alt"></i></a></li>
+
+				<%} %> 
 				<% if(locals.user){%> 
 
 
