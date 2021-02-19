@@ -1,4 +1,3 @@
-
 /*---------------------- carrousel banner ---------------------*/
 
 const startBannerShow = () => {
@@ -13,3 +12,5 @@ const startBannerShow = () => {
 };
 
 startBannerShow();
+
+

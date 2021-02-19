@@ -50,8 +50,6 @@ router.patch('/:productId/update',  userLogued, upload.any(),validate('title','d
 /*** DELETE ONE PRODUCT ***/ 
 router.delete('/:productId/delete', userLogued ,productsController.destroy); 
 
- 
-
 
 
 module.exports = router;

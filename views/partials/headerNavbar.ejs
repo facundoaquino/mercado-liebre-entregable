@@ -9,7 +9,11 @@
 
 			<div class="col-7 col-md-6">
 				<form action="/search" method="GET" class="search-form">
-					<input type="text" name="keywords" placeholder="Buscar productos, marcas y más" class="search-form_input">
+					<input id="searchInput" list="products" name="keywords" placeholder="Buscar productos, marcas y más" class="search-form_input" autocomplete="off">
+					<datalist id="products">
+					 
+					  </datalist> 
+					
 					<button type="submit" class="search-form_button"><i class="fas fa-search"></i></button>
 				</form>
 			</div>
