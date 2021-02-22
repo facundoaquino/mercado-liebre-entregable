@@ -1,109 +1,134 @@
 <!DOCTYPE html>
 <html lang="es">
-<!-- Include Head -->
-<%- include('partials/head', {title: 'Formulario de creación'}) %>
-<body>
-	<!-- Header -->
-	<%- include('partials/headerNavbar') %>
-	<!-- /Header -->
+	<!-- Include Head -->
+	<%- include('partials/head', {title: 'Formulario de creación'}) %>
+	<body>
+		<!-- Header -->
+		<%- include('partials/headerNavbar') %>
+		<!-- /Header -->
 
-	<div class="container products-wrapper">
-		<div class="row">
-			<div class="col-12">
-				<h2 class="products-title">Formulario de creación de productos</h2>
+		<div class="container products-wrapper">
+			<div class="row">
+				<div class="col-12">
+					<h2 class="products-title">Formulario de creación de productos</h2>
+				</div>
 			</div>
-		</div>
-		<div class="col-12">
-			<form action="/products/create" method="POST" enctype="multipart/form-data">
-				<div class="row product-detail">
-					<div class="col-12 col-md-6">
-						<label for="name" class="form-label">Nombre del producto:</label>
-						<input type="text" id="title" name="title" placeholder="Ej: Zapatillas Reebok" class="form-input" value='<%=body.title%>'>
-						<% if(errors.title) {%>
+			<div class="col-12">
+				<form action="/products/create" method="POST" enctype="multipart/form-data">
+					<div class="row product-detail">
+						<div class="col-12 col-md-6">
+							<label for="name" class="form-label">Nombre del producto:</label>
+							<input
+								type="text"
+								id="title"
+								name="title"
+								placeholder="Ej: Zapatillas Reebok"
+								class="form-input"
+								value="<%=body.title%>"
+							/>
+							<% if(errors.title) {%>
 
-							<p class="validationMessage" style="  font-size: 12px;">
-								<i class="validationMessage--i fas fa-exclamation-triangle" style="color:tomato"></i><%=errors.title.msg%>
+							<p class="validationMessage" style="font-size: 12px">
+								<i class="validationMessage--i fas fa-exclamation-triangle" style="color: tomato"></i
+								><%=errors.title.msg%>
 							</p>
-				
-							<% }%>
-					</div>
-					<div class="col-12 col-md-6">
-						<label for="price" class="form-label">Precio del producto:</label>
-						<input type="text" id="price" name="price" placeholder="Ej: 5678" class="form-input" value="<%=body.price%>">
-						<% if(errors.price) {%>
 
-							<p class="validationMessage" style="  font-size: 12px;">
-								<i class="validationMessage--i fas fa-exclamation-triangle" style="color:tomato"></i><%=errors.price.msg%>
+							<% }%>
+						</div>
+						<div class="col-12 col-md-6">
+							<label for="price" class="form-label">Precio del producto:</label>
+							<input
+								type="text"
+								id="price"
+								name="price"
+								placeholder="Ej: 5678"
+								class="form-input"
+								value="<%=body.price%>"
+							/>
+							<% if(errors.price) {%>
+
+							<p class="validationMessage" style="font-size: 12px">
+								<i class="validationMessage--i fas fa-exclamation-triangle" style="color: tomato"></i
+								><%=errors.price.msg%>
 							</p>
-				
+
 							<% }%>
-					</div>
-				 
-					<div class="col-12 col-md-6">
-						<label for="category" class="form-label">Categorías:</label>
-						<select name="category" id="category" class="form-input">
-							<% categories.forEach(category=>{%> 
+						</div>
 
+						<div class="col-12 col-md-6">
+							<label for="category" class="form-label">Categorías:</label>
+							<select name="category" id="category" class="form-input">
+								<% categories.forEach(category=>{%> <% if (body.category == category.id){%>
 
+								<option selected value="<%=category.id%>"><%=category.name%></option>
+
+								<% } %>
 								<option value="<%=category.id%>"><%=category.name%></option>
 
-<% }) %> 
-							 
-						</select>
-					</div>
-					<div class="col-12 col-md-6">
-						<label for="category" class="form-label">Marcas:</label>
-						<select name="brand" id="category" class="form-input">
-							<% brands.forEach(brand=>{%> 
+								<% }) %>
+							</select>
+						</div>
+						<div class="col-12 col-md-6">
+							<label for="category" class="form-label">Marcas:</label>
+							<select name="brand" id="category" class="form-input">
+								<% brands.forEach(brand=>{%>
+									<% if (body.brand == brand.id){%>
 
+										<option selected value="<%=brand.id%>"><%=brand.name%></option>
+
+		
+										<% } %>
 
 								<option value="<%=brand.id%>"><%=brand.name%></option>
 
-<% }) %> 
-						</select>
-					</div>
-					<div class="col-12 col-md-6">
-						<label for="image" class="form-label">Subir imagen:</label>
-						<input
-							type="file"
-							value=""
-							id="image"
-							name="file"
-							placeholder="Ej: 15"
-							class="form-input"
-							accept=".jpg,.webp,.jfif"
-						/>
-						<% if(errors.image) {%>
+								<% }) %>
+							</select>
+						</div>
+						<div class="col-12 col-md-6">
+							<label for="image" class="form-label">Subir imagen:</label>
+							<input
+								type="file"
+								value=""
+								id="image"
+								name="file"
+								placeholder="Ej: 15"
+								class="form-input"
+								accept=".jpg,.webp,.jfif"
+							/>
+							<% if(errors.image) {%>
 
-							<p class="validationMessage" style="  font-size: 12px;">
-								<i class="validationMessage--i fas fa-exclamation-triangle" style="color:tomato"></i><%=errors.image%>
+							<p class="validationMessage" style="font-size: 12px">
+								<i class="validationMessage--i fas fa-exclamation-triangle" style="color: tomato"></i
+								><%=errors.image%>
 							</p>
-				
-							<% }%>
-					</div>
-					<div class="col-12">
-						<label for="description" class="form-label">Descipción:</label>
-						<textarea name="description" id="description" class="form-input" ><%=body.description%></textarea>
-						<% if(errors.description) {%>
 
-							<p class="validationMessage" style="  font-size: 12px;">
-								<i class="validationMessage--i fas fa-exclamation-triangle" style="color:tomato"></i><%=errors.description.msg%>
-							</p>
-				
 							<% }%>
+						</div>
+						<div class="col-12">
+							<label for="description" class="form-label">Descipción:</label>
+							<textarea name="description" id="description" class="form-input">
+<%=body.description%></textarea
+							>
+							<% if(errors.description) {%>
+
+							<p class="validationMessage" style="font-size: 12px">
+								<i class="validationMessage--i fas fa-exclamation-triangle" style="color: tomato"></i
+								><%=errors.description.msg%>
+							</p>
+
+							<% }%>
+						</div>
+						<div class="col-12">
+							<button type="submit" class="buy-now-button">Guardar producto</button>
+						</div>
 					</div>
-					<div class="col-12">
-						<button type="submit" class="buy-now-button">Guardar producto</button>
-					</div>
-				</div>
-			</form>
+				</form>
+			</div>
 		</div>
+		<!-- /todos los productos -->
 
-	</div>
-	<!-- /todos los productos -->
-
-	<!-- footer -->
-	<%- include('partials/footer') %>
-	<!-- /footer -->
-</body>	
+		<!-- footer -->
+		<%- include('partials/footer') %>
+		<!-- /footer -->
+	</body>
 </html>
