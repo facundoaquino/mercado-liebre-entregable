@@ -67,12 +67,12 @@ const userController = {
 				],
 			})
 
-			const passwordIsTrue = bcrypt.compareSync(req.body.password, user.password)
+			const passwordIsTrue = user ? bcrypt.compareSync(req.body.password, user.password) : false
 
 			if (!user || !passwordIsTrue) {
 				res.locals.loginWrong = 'Credenciales invalidas'
 				res.locals.body = req.body
-			return	res.render('login', { errors: {} })
+				return res.render('login', { errors: {} })
 			}
 
 			const userShortName = user.email.split('@')[0]
@@ -112,13 +112,11 @@ const userController = {
 			res.render('error-page')
 		}
 	},
-  logout:(req,res)=>{
-
-    req.session.destroy((err) => {
+	logout: (req, res) => {
+		req.session.destroy((err) => {
 			res.redirect('/')
 		})
-  
-  }
+	},
 }
 
 module.exports = userController

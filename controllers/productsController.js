@@ -17,6 +17,7 @@ const controller = {
 				include: { association: 'brand' },
 				offset: startPage,
 				limit: 10,
+				order: [['created_at', 'DESC']],
 			})
 			const totalRound = count % 10 == 0 ? count / 10 : Math.floor(count / 10 + 1)
 			const page = startPage / 10 + 1

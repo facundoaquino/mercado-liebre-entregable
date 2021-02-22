@@ -38,7 +38,7 @@ const controller = {
 
 			const page = startPage / 10 + 1
 			res.locals.referencePage = { totalRound, page }
-			if (totalRound == page) {
+			if (totalRound == page || !count) {
 				res.locals.pagination = { continue: false, count }
 			} else {
 				res.locals.pagination = { continue: true, start: startPage + 10, count }
