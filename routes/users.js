@@ -38,4 +38,5 @@ router.get("/login",userIsLogin, userController.loginForm);
 router.post("/login", validate("email", "password"), userController.login);
 router.get("/profile", userLogued, userController.profile);
 router.patch('/avatar/update',userLogued ,upload.any(),userController.avatarUpdate)
+router.get('/logout', userLogued , userController.logout)
 module.exports = router;

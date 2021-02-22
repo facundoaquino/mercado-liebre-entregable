@@ -112,6 +112,13 @@ const userController = {
 			res.render('error-page')
 		}
 	},
+  logout:(req,res)=>{
+
+    req.session.destroy((err) => {
+			res.redirect('/')
+		})
+  
+  }
 }
 
 module.exports = userController
