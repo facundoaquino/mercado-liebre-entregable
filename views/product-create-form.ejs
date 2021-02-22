@@ -14,7 +14,7 @@
 				</div>
 			</div>
 			<div class="col-12">
-				<form action="/products/create" method="POST" enctype="multipart/form-data">
+				<form id="createForm" action="/products/create" method="POST" enctype="multipart/form-data">
 					<div class="row product-detail">
 						<div class="col-12 col-md-6">
 							<label for="name" class="form-label">Nombre del producto:</label>
@@ -130,5 +130,7 @@
 		<!-- footer -->
 		<%- include('partials/footer') %>
 		<!-- /footer -->
+		<script src="/js/validator.min.js"></script>
+		<script src="/js/validation.js"></script>
 	</body>
 </html>

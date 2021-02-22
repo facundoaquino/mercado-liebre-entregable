@@ -116,6 +116,7 @@ hr {
 
 .validationMessage{
   font-size: 16px !important;
+  
 }
 
 
@@ -303,6 +304,11 @@ hr {
   overflow: hidden;
 }
 
+.product-detail > div {
+ position: relative;
+}
+
+
 .product-detail-img {
   width: 70%;
   display: block;
@@ -436,6 +442,12 @@ textarea.form-input {
 }
 /*====== Media-Queries ======*/
 @media (min-width: 768px) {
+  .validationMessage{
+    font-size: 16px !important;
+    position: absolute;
+    bottom: -20px;
+    left: 20px;
+  }
   .main-header_credit-link {
     margin-top: 0;
     text-align: right;
