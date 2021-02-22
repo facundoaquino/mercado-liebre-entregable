@@ -27,6 +27,7 @@ const printErrorInput = (input) => {
 }
 
 const getValidation = (inputs) => {
+	const errors = { count: 0 }
 	inputs.forEach((input) => {
 		const hasError = input.parentNode.querySelector('.validationMessage')
 		if (hasError) {
@@ -35,8 +36,10 @@ const getValidation = (inputs) => {
 
 		if (!validations[input.name](input.value)) {
 			printErrorInput(input)
+			errors.count++
 		}
 	})
+	return errors.count
 }
 
 /*---------------------- DOM REFERENCES ---------------------*/
@@ -44,10 +47,10 @@ const inputs = document.querySelectorAll('.form-input')
 
 const form = document.getElementById('createForm')
 
-// inputsName.forEach(input=>console.log(input.name))
-
 form.addEventListener('submit', (e) => {
-	e.preventDefault()
-
-	getValidation(inputs)
+	const errors = getValidation(inputs)
+	if (errors) {
+		e.preventDefault()
+		console.log(errors)
+	}
 })
