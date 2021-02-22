@@ -72,7 +72,7 @@ const userController = {
 			if (!user || !passwordIsTrue) {
 				res.locals.loginWrong = 'Credenciales invalidas'
 				res.locals.body = req.body
-				res.render('login', { errors: {} })
+			return	res.render('login', { errors: {} })
 			}
 
 			const userShortName = user.email.split('@')[0]
