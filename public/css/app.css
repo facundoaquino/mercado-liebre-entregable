@@ -419,7 +419,21 @@ textarea.form-input {
   resize: vertical;
   padding: 15px;
 }
+/*====== error page ======*/
 
+.errorMain{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+
+.errorMain  a{
+ display: block;
+ margin: 0 auto;
+ text-align: center;
+ width: 150px;
+}
 /*====== Media-Queries ======*/
 @media (min-width: 768px) {
   .main-header_credit-link {
