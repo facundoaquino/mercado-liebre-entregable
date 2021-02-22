@@ -131,7 +131,7 @@ const controller = {
 				res.locals.brands = await db.Brands.findAll()
 				res.locals.category = await db.Categories.findByPk(product.category_id)
 				res.locals.product = { ...req.body, id: id }
-
+				 
 				return res.render('product-edit-form')
 			}
 

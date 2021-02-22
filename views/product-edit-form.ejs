@@ -81,7 +81,7 @@
 							<label for="category" class="form-label">Marcas:</label>
 							<select name="brand" id="category" class="form-input">
 								<% brands.forEach(brand=>{%>
-								<%if(brand.id == product.brand_id ) {%>
+								<%if( brand.id==product.brand ||brand.id == product.brand_id ) {%>
 								<option value="<%=brand.id%>" selected><%=brand.name%></option>
 										
 
