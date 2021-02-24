@@ -16,3 +16,14 @@ const getProducts = async (keyword) => {
 searchInput.addEventListener("input", (e) => {
   getProducts(e.target.value);
 });
+
+/*---------------------- responsive menu ---------------------*/
+
+const button = document.querySelector('.btn-toggle-navbar')
+const menu = document.querySelector('.main-navbar')
+console.log(button);
+
+button.addEventListener('click',()=>{
+
+  menu.classList.toggle('show')
+})

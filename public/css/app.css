@@ -136,6 +136,20 @@ hr {
   margin-top: 20px;
   display: none;
 }
+.main-navbar.show{
+  display: block;
+  height: 0px;
+  animation: show 2s ease-in;
+}
+@keyframes show {
+  from{
+    height: 0%;
+  }
+  to{
+    height: 100%;
+
+  }
+}
 
 .left-navbar,
 .right-navbar {
