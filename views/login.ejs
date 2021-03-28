@@ -1,90 +1,68 @@
 <!DOCTYPE html>
 <html lang="es">
-  <!-- Include Head -->
-  <%- include('partials/head', {title: 'Login'}) %>
-  <body>
-    <!-- Header -->
-    <%- include('partials/headerNavbar') %>
-    <!-- /Header -->
+	<!-- Include Head -->
+	<%- include('partials/head', {title: 'Registrate'}) %>
+	<body>
+		<!-- Header -->
+		<header class="main-header register__header">
+			<div class="col-5 col-md-2">
+				<a href="/" class="main-header_home-link">
+					<img src="/images/logo-mercado-liebre.svg" />
+				</a>
+			</div>
+		</header>
+		<!-- /Header -->
 
-    <div class="container products-wrapper">
-      <div class="row">
-        <div class="col-12">
-          <h2 class="products-title">Ingresa a tu cuenta</h2>
-        </div>
-      </div>
-      <div class="col-12">
-        <form action="/login" method="POST">
-          <div class="product-detail">
-            <div class="col-12 col-md-6" style="padding: 20px;">
-              <label for="email" class="form-label">Email</label>
-              <input
-                type="text"
-                id="email"
-				value="<%=body.email%>"
-                name="email"
-                placeholder="Ingresa tu email"
-                class="form-input"
-              />
+		<div class="register__container products-wrapper">
+			<form action="/login" method="POST">
+				<label for="email" class="form-label">Email</label>
+				<input
+					type="text"
+					id="email"
+					value="<%=body.email%>"
+					name="email"
+					placeholder="Ingresa tu email"
+					class="form-input"
+				/>
 
-              <% if(errors.email) {%>
-
-              <p class="validationMessage" style="font-size: 12px">
-                <i
-                  class="validationMessage--i fas fa-exclamation-triangle"
-                  style="color: tomato"
-                ></i
-                ><%=errors.email.msg%>
-              </p>
-
-              <% }%>
-
-            </div>
-            <div class="col-12 col-md-6" style="padding: 20px;">
-              <label for="password" class="form-label">Contraseña</label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                placeholder="Ingresa tu cotraseña"
-                class="form-input"
-				value="<%=body.password%>"
-              />
-			  <% if(errors.password) {%>
+				<% if(errors.email) {%>
 
 				<p class="validationMessage" style="font-size: 12px">
-				  <i
-					class="validationMessage--i fas fa-exclamation-triangle"
-					style="color: tomato"
-				  ></i
-				  ><%=errors.password.msg%>
+					<i class="validationMessage--i fas fa-exclamation-triangle" style="color: tomato"></i
+					><%=errors.email.msg%>
 				</p>
-  
+
 				<% }%>
-        <% if(loginWrong) {%>
 
-          <p class="validationMessage" style="font-size: 12px">
-            <i
-            class="validationMessage--i fas fa-exclamation-triangle"
-            style="color: tomato"
-            ></i
-            ><%=loginWrong%>
-          </p>
-    
-          <% }%>
-            </div>
+				<label for="password" class="form-label">Contraseña</label>
+				<input
+					type="password"
+					id="password"
+					name="password"
+					placeholder="Ingresa tu cotraseña"
+					class="form-input"
+					value="<%=body.password%>"
+				/>
+				<% if(errors.password) {%>
 
-            <div class="col-12 mt-5">
-              <button type="submit" class="buy-now-button">Ingresar</button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-    <!-- /todos los productos -->
+				<p class="validationMessage" style="font-size: 12px">
+					<i class="validationMessage--i fas fa-exclamation-triangle" style="color: tomato"></i
+					><%=errors.password.msg%>
+				</p>
 
-    <!-- footer -->
-    <%- include('partials/footer') %>
-    <!-- /footer -->
-  </body>
+				<% }%>
+
+				<button type="submit" class="buy-now-button">Ingresar</button>
+			</form>
+		</div>
+		<!-- /todos los productos -->
+
+		<!-- footer -->
+		<div class="sub-footer register__footer">
+			<div class="container text-center">
+				<p>Copyright © 1999-2019 MercadoLiebre S.R.L.</p>
+			</div>
+		</div>
+		<!-- /footer -->
+	</body>
 </html>
